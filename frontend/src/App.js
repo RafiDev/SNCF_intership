@@ -5,8 +5,8 @@ import axios from 'axios'
 const endpoint = 'http://localhost:8000/upload'
 
 class App extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       selectedFile: null,
       loaded: 0,
@@ -34,12 +34,25 @@ class App extends Component {
         console.log(res.statusText)
       })
   }
+
+  handleDisplay = () => {
+    axios.get(endpoint).then(res => {
+      console.log(res.data);
+    })
+  }
+
   render() {
     return (
       <div className="App">
         <input type="file" name="" id="" onChange={this.handleselectedFile} />
         <button onClick={this.handleUpload}>Upload</button>
+        <br/>
         <div> {Math.round(this.state.loaded, 2)} %</div>
+        <hr/>
+        <div>
+          <h2>Rexmat file data</h2>
+          <button onClick={this.handleDisplay}>Display data</button>
+        </div>
       </div>
     )
   }

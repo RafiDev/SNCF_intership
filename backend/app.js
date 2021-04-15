@@ -3,7 +3,6 @@ const path = require('path')
 const logger = require('morgan')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
-//const fileUpload = require('express-fileupload')
 const cors = require('cors')
 var multer = require('multer');
 var xlstojson = require("xls-to-json-lc");
@@ -12,8 +11,10 @@ var xlsxtojson = require("xlsx-to-json-lc");
 const app = express()
 const port = process.env.PORT || 8000
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+// view engine setup
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'jade')
+
 app.use(logger('dev'))
 app.use(cors())
 app.use(bodyParser.json())
@@ -29,7 +30,7 @@ app.get('/', (req, res) => {
   res.status(200).send('<h1>Project Server</h1>');
 })
 
-var storage = multer.diskStorage({ //multers disk storage settings
+var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './uploads/')
     },
@@ -39,7 +40,6 @@ var storage = multer.diskStorage({ //multers disk storage settings
     }
 });
 var upload = multer({ storage: storage, fileFilter : function(req, file, callback) { 
-    //file filter
     if (['xls', 'xlsx'].indexOf(file.originalname.split('.')[file.originalname.split('.').length-1]) === -1) {
         return callback(new Error('Wrong extension type'));
     }
@@ -53,14 +53,12 @@ app.post('/upload', function(req, res) {
             res.json({error_code:1,err_desc:err});
             return;
         }
-    /** Multer gives us file info in req.file object */
-    if (!req.file) {
+
+        if (!req.file) {
         res.json({error_code:1,err_desc:"No file passed"});
         return;
     }
-    /** Check the extension of the incoming file and
-    *  use the appropriate module
-    */
+
     if (req.file.originalname.split('.')[req.file.originalname.split('.').length-1] === 'xlsx') {
         exceltojson = xlsxtojson;
     } else {
@@ -205,7 +203,8 @@ app.post('/upload', function(req, res) {
                     "Porte": PORTE, "Frein": FREIN, 
                     "Comptage Passagers": ComptagePassagers, "Afficheur": AFFICHEUR, 
                     "Lecteur Badge": LecteurBadge, "Eclairage": ECLAIRAGE, 
-                    "Pupitre": PUPITRE, "Sonorisation": SONO
+                    "Pupitre": PUPITRE, "Sonorisation": SONO,
+                    "Compresseur": COMPRESSEUR
                 };
                 
                 var data = {
@@ -221,15 +220,16 @@ app.post('/upload', function(req, res) {
                         "SET": dataSET,
                         "Nombre total de CBM": CompteurCBM,
                     }
-                }
-                console.log(JSON.stringify(data));
-                return res.send(JSON.stringify(data));
+                };
+                console.log(data);
+                res.json({data});
             });
         } catch (e) {
             res.json({error_code: 1,err_desc: "Corupted excel file"});
         }
     })
 })
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -246,7 +246,7 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500)
-  res.render('error')
+  res.json({ error: err })
 })
 
 app.listen(port, () => {
