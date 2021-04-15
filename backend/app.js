@@ -10,6 +10,7 @@ var xlstojson = require("xls-to-json-lc");
 var xlsxtojson = require("xlsx-to-json-lc");
 
 const app = express()
+const port = process.env.PORT || 8000
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -248,4 +249,6 @@ app.use(function (err, req, res, next) {
   res.render('error')
 })
 
-module.exports = app
+app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`)
+})
