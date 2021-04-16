@@ -10,6 +10,7 @@ class App extends Component {
     this.state = {
       selectedFile: null,
       loaded: 0,
+      data: []
     }
   }
   handleselectedFile = event => {
@@ -31,14 +32,11 @@ class App extends Component {
         },
       })
       .then(res => {
-        console.log(res.statusText)
+        console.log(res.data.data['Hiérarchie de la flotte'])
+        this.setState({
+          data: res.data.data['Hiérarchie de la flotte'],
+        })
       })
-  }
-
-  handleDisplay = () => {
-    axios.get(endpoint).then(res => {
-      console.log(res.data);
-    })
   }
 
   render() {
@@ -51,7 +49,24 @@ class App extends Component {
         <hr/>
         <div>
           <h2>Rexmat file data</h2>
-          <button onClick={this.handleDisplay}>Display data</button>
+          <table>
+            <thead>
+              <tr>
+              <th>H1</th>
+              <th>H2</th>
+              <th>H3</th>
+              <th>H4</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{this.state.data.H1}</td>
+                <td>{this.state.data.H2}</td>
+                <td>{this.state.data.H3}</td>
+                <td>{this.state.data.H4}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     )
