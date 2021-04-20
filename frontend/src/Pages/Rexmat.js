@@ -9,32 +9,15 @@ class Rexmat extends Component {
     this.state = {
       selectedFile: null,
       loaded: 0,
-      nbH1: 0,
-      nbH2: 0,
-      nbH3: 0,
-      nbH4: 0,
-      systemeTT: 0,
-      nbSET: 0,
-      nbCBM: 0,
-      nbATESS: 0,
-      nbAfficheur: 0,
-      nbBS: 0,
-      nbCCTV: 0,
-      nbClim: 0,
-      nbComp: 0,
-      nbCompPass: 0,
-      nbDectIncendie: 0,
-      nbEMCO: 0,
-      nbEQS: 0,
-      nbEclairage: 0,
-      nbFrein: 0,
-      nbLectBadge: 0,
-      nbPorte: 0,
-      nbPupitre: 0,
-      nbSono: 0,
-      nbTCMS: 0,
-      nbTDB: 0,
-      nbTraction: 0
+      Hierarchie_de_la_flotte: [],
+      Nombre_de_signalement_par_hierarchie: [],
+      Nombre_de_système_total: null,
+      Type_de_signalement: [],
+      Signalement_SET: [],
+      Signalement_H1: [],
+      Signalement_H2: [],
+      Signalement_H3: [],
+      Signalement_H4: []
     }
   }
   handleselectedFile = event => {
@@ -56,34 +39,16 @@ class Rexmat extends Component {
         },
       })
       .then(res => {
-        //console.log(res.data.data)
         this.setState({
-          nbH1: res.data.data['Hiérarchie de la flotte'].H1,
-          nbH2: res.data.data['Hiérarchie de la flotte'].H2,
-          nbH3: res.data.data['Hiérarchie de la flotte'].H3,
-          nbH4: res.data.data['Hiérarchie de la flotte'].H4,
-          systemeTT: res.data.data['Nombre de système total'],
-          nbSET: res.data.data['Type de signalement']['Nombre total de SET'],
-          nbCBM: res.data.data['Type de signalement']['Nombre total de CBM'],
-          nbATESS: res.data.data['Type de signalement'].SET.ATESS,
-          nbAfficheur: res.data.data['Type de signalement'].SET.Afficheur,
-          nbBS: res.data.data['Type de signalement'].SET.BS,
-          nbCCTV: res.data.data['Type de signalement'].SET.CCTV,
-          nbClim: res.data.data['Type de signalement'].SET.Climatisation,
-          nbComp: res.data.data['Type de signalement'].SET.Compresseur,
-          nbCompPass: res.data.data['Type de signalement'].SET['Comptage Passagers'],
-          nbDectIncendie: res.data.data['Type de signalement'].SET['Detection Incendie'],
-          nbEMCO: res.data.data['Type de signalement'].SET.EMCO,
-          nbEQS: res.data.data['Type de signalement'].SET.EQS,
-          nbEclairage: res.data.data['Type de signalement'].SET.Eclairage,
-          nbFrein: res.data.data['Type de signalement'].SET.Frein,
-          nbLectBadge: res.data.data['Type de signalement'].SET[''],
-          nbPorte: res.data.data['Type de signalement'].SET.Porte,
-          nbPupitre: res.data.data['Type de signalement'].SET.Pupitre,
-          nbSono: res.data.data['Type de signalement'].SET.Sonorisation,
-          nbTCMS: res.data.data['Type de signalement'].SET.TCMS,
-          nbTDB: res.data.data['Type de signalement'].SET.TDB,
-          nbTraction: res.data.data['Type de signalement'].SET.Traction
+          Hierarchie_de_la_flotte: res.data.data["Hiérarchie de la flotte"],
+          Nombre_de_signalement_par_hierarchie: res.data.data["Nombre de signalement par hiérarchie"],
+          Nombre_de_système_total: res.data.data["Nombre de système total"],
+          Type_de_signalement: res.data.data["Type de signalement"],
+          Signalement_SET: res.data.data["Type de signalement"].SET,
+          Signalement_H1: res.data.data["Nombre de signalement par hiérarchie"]["systeme en H1"],
+          Signalement_H2: res.data.data["Nombre de signalement par hiérarchie"]["systeme en H2"],
+          Signalement_H3: res.data.data["Nombre de signalement par hiérarchie"]["systeme en H3"],
+          Signalement_H4: res.data.data["Nombre de signalement par hiérarchie"]["systeme en H4"],
         })
       })
   }
@@ -105,7 +70,7 @@ class Rexmat extends Component {
             </thead>
             <tbody>
               <tr>
-                <td>{this.state.systemeTT}</td>
+                <td>{this.state.Nombre_de_système_total}</td>
               </tr>
             </tbody>
           </table>
@@ -121,10 +86,10 @@ class Rexmat extends Component {
             </thead>
             <tbody>
               <tr>
-                <td>{this.state.nbH1}</td>
-                <td>{this.state.nbH2}</td>
-                <td>{this.state.nbH3}</td>
-                <td>{this.state.nbH4}</td>
+                <td>{this.state.Hierarchie_de_la_flotte.H1}</td>
+                <td>{this.state.Hierarchie_de_la_flotte.H2}</td>
+                <td>{this.state.Hierarchie_de_la_flotte.H3}</td>
+                <td>{this.state.Hierarchie_de_la_flotte.H4}</td>
               </tr>
             </tbody>
           </table>
@@ -138,31 +103,128 @@ class Rexmat extends Component {
             </thead>
             <tbody>
               <tr>
-                <td>{this.state.nbSET}</td>
-                <td>{this.state.nbCBM}</td>
+                <td>{this.state.Type_de_signalement["Nombre total de SET"]}</td>
+                <td>{this.state.Type_de_signalement["Nombre total de CBM"]}</td>
               </tr>
             </tbody>
           </table>
           <br/>
+          <h2>Nombre de systeme au total</h2>
           <ul>
-            <li>ATESS: {this.state.nbATESS}</li>
-            <li>Afficheur: {this.state.nbAfficheur}</li>
-            <li>BS: {this.state.nbBS}</li>
-            <li>CCTV: {this.state.nbCCTV}</li>
-            <li>Climatisation: {this.state.nbClim}</li>
-            <li>Compresseur: {this.state.nbComp}</li>
-            <li>Comptage Passagers: {this.state.nbCompPass}</li>
-            <li>Detection Incendie: {this.state.nbDectIncendie}</li>
-            <li>EMCO: {this.state.nbEMCO}</li>
-            <li>EQS: {this.state.nbEQS}</li>
-            <li>Eclairage: {this.state.nbEclairage}</li>
-            <li>Frein: {this.state.nbFrein}</li>
-            <li>Lecteur Badge: {this.state.nbLectBadge}</li>
-            <li>Porte: {this.state.nbPorte}</li>
-            <li>Pupitre: {this.state.nbPupitre}</li>
-            <li>Sonorisation: {this.state.nbSono}</li>
-            <li>TCMS: {this.state.nbTCMS}</li>
-            <li>Traction: {this.state.nbTraction}</li>
+            <li>ATESS: {this.state.Signalement_SET.ATESS}</li>
+            <li>Afficheur: {this.state.Signalement_SET.Afficheur}</li>
+            <li>BS: {this.state.Signalement_SET.BS}</li>
+            <li>CCTV: {this.state.Signalement_SET.CCTV}</li>
+            <li>Climatisation: {this.state.Signalement_SET.Climatisation}</li>
+            <li>Compresseur: {this.state.Signalement_SET.Compresseur}</li>
+            <li>Comptage Passagers: {this.state.Signalement_SET["Comptage Passagers"]}</li>
+            <li>Detection Incendie: {this.state.Signalement_SET["Detection Incendie"]}</li>
+            <li>EMCO: {this.state.Signalement_SET.EMCO}</li>
+            <li>EQS: {this.state.Signalement_SET.EQS}</li>
+            <li>Eclairage: {this.state.Signalement_SET.Eclairage}</li>
+            <li>Frein: {this.state.Signalement_SET.Frein}</li>
+            <li>Lecteur Badge: {this.state.Signalement_SET["Lecteur Badge"]}</li>
+            <li>Porte: {this.state.Signalement_SET.Porte}</li>
+            <li>Pupitre: {this.state.Signalement_SET.Pupitre}</li>
+            <li>Sonorisation: {this.state.Signalement_SET.Sonorisation}</li>
+            <li>TCMS: {this.state.Signalement_SET.TCMS}</li>
+            <li>Traction: {this.state.Signalement_SET.Traction}</li>
+          </ul>
+          <br/>
+          <h2>Nombre de systeme en H1</h2>
+          <ul>
+            <li>ATESS: {this.state.Signalement_H1.ATESS}</li>
+            <li>Afficheur: {this.state.Signalement_H1.Afficheur}</li>
+            <li>BS: {this.state.Signalement_H1.BS}</li>
+            <li>CCTV: {this.state.Signalement_H1.CCTV}</li>
+            <li>Climatisation: {this.state.Signalement_H1.Climatisation}</li>
+            <li>Compresseur: {this.state.Signalement_H1.Compresseur}</li>
+            <li>Comptage Passagers: {this.state.Signalement_H1["Comptage Passagers"]}</li>
+            <li>Detection Incendie: {this.state.Signalement_H1["Detection Incendie"]}</li>
+            <li>EMCO: {this.state.Signalement_H1.EMCO}</li>
+            <li>EQS: {this.state.Signalement_H1.EQS}</li>
+            <li>Eclairage: {this.state.Signalement_H1.Eclairage}</li>
+            <li>Frein: {this.state.Signalement_H1.Frein}</li>
+            <li>Lecteur Badge: {this.state.Signalement_H1["Lecteur Badge"]}</li>
+            <li>Porte: {this.state.Signalement_H1.Porte}</li>
+            <li>Pupitre: {this.state.Signalement_H1.Pupitre}</li>
+            <li>Sonorisation: {this.state.Signalement_H1.Sonorisation}</li>
+            <li>TCMS: {this.state.Signalement_H1.TCMS}</li>
+            <li>Traction: {this.state.Signalement_H1.Traction}</li>
+            <li>Total de SET en H1: {this.state.Signalement_H1["Nombre de SET en H1"]}</li>
+            <li>Total de CBM en H1: {this.state.Signalement_H1["Nombre de CBM en H1"]}</li>
+          </ul>
+          <br/>
+          <h2>Nombre de systeme en H2</h2>
+          <ul>
+            <li>ATESS: {this.state.Signalement_H2.ATESS}</li>
+            <li>Afficheur: {this.state.Signalement_H2.Afficheur}</li>
+            <li>BS: {this.state.Signalement_H2.BS}</li>
+            <li>CCTV: {this.state.Signalement_H2.CCTV}</li>
+            <li>Climatisation: {this.state.Signalement_H2.Climatisation}</li>
+            <li>Compresseur: {this.state.Signalement_H2.Compresseur}</li>
+            <li>Comptage Passagers: {this.state.Signalement_H2["Comptage Passagers"]}</li>
+            <li>Detection Incendie: {this.state.Signalement_H2["Detection Incendie"]}</li>
+            <li>EMCO: {this.state.Signalement_H2.EMCO}</li>
+            <li>EQS: {this.state.Signalement_H2.EQS}</li>
+            <li>Eclairage: {this.state.Signalement_H2.Eclairage}</li>
+            <li>Frein: {this.state.Signalement_H2.Frein}</li>
+            <li>Lecteur Badge: {this.state.Signalement_H2["Lecteur Badge"]}</li>
+            <li>Porte: {this.state.Signalement_H2.Porte}</li>
+            <li>Pupitre: {this.state.Signalement_H2.Pupitre}</li>
+            <li>Sonorisation: {this.state.Signalement_H2.Sonorisation}</li>
+            <li>TCMS: {this.state.Signalement_H2.TCMS}</li>
+            <li>Traction: {this.state.Signalement_H2.Traction}</li>
+            <li>Total de SET en H2: {this.state.Signalement_H2["Nombre de SET en H2"]}</li>
+            <li>Total de CBM en H2: {this.state.Signalement_H2["Nombre de CBM en H2"]}</li>
+          </ul>
+          <br/>
+          <h2>Nombre de systeme en H3</h2>
+          <ul>
+            <li>ATESS: {this.state.Signalement_H3.ATESS}</li>
+            <li>Afficheur: {this.state.Signalement_H3.Afficheur}</li>
+            <li>BS: {this.state.Signalement_H3.BS}</li>
+            <li>CCTV: {this.state.Signalement_H3.CCTV}</li>
+            <li>Climatisation: {this.state.Signalement_H3.Climatisation}</li>
+            <li>Compresseur: {this.state.Signalement_H3.Compresseur}</li>
+            <li>Comptage Passagers: {this.state.Signalement_H3["Comptage Passagers"]}</li>
+            <li>Detection Incendie: {this.state.Signalement_H3["Detection Incendie"]}</li>
+            <li>EMCO: {this.state.Signalement_H3.EMCO}</li>
+            <li>EQS: {this.state.Signalement_H3.EQS}</li>
+            <li>Eclairage: {this.state.Signalement_H3.Eclairage}</li>
+            <li>Frein: {this.state.Signalement_H3.Frein}</li>
+            <li>Lecteur Badge: {this.state.Signalement_H3["Lecteur Badge"]}</li>
+            <li>Porte: {this.state.Signalement_H3.Porte}</li>
+            <li>Pupitre: {this.state.Signalement_H3.Pupitre}</li>
+            <li>Sonorisation: {this.state.Signalement_H3.Sonorisation}</li>
+            <li>TCMS: {this.state.Signalement_H3.TCMS}</li>
+            <li>Traction: {this.state.Signalement_H3.Traction}</li>
+            <li>Total de SET en H3: {this.state.Signalement_H3["Nombre de SET en H3"]}</li>
+            <li>Total de CBM en H3: {this.state.Signalement_H3["Nombre de CBM en H3"]}</li>
+          </ul>
+          <br/>
+          <h2>Nombre de systeme en H4</h2>
+          <ul>
+            <li>ATESS: {this.state.Signalement_H4.ATESS}</li>
+            <li>Afficheur: {this.state.Signalement_H4.Afficheur}</li>
+            <li>BS: {this.state.Signalement_H4.BS}</li>
+            <li>CCTV: {this.state.Signalement_H4.CCTV}</li>
+            <li>Climatisation: {this.state.Signalement_H4.Climatisation}</li>
+            <li>Compresseur: {this.state.Signalement_H4.Compresseur}</li>
+            <li>Comptage Passagers: {this.state.Signalement_H4["Comptage Passagers"]}</li>
+            <li>Detection Incendie: {this.state.Signalement_H4["Detection Incendie"]}</li>
+            <li>EMCO: {this.state.Signalement_H4.EMCO}</li>
+            <li>EQS: {this.state.Signalement_H4.EQS}</li>
+            <li>Eclairage: {this.state.Signalement_H4.Eclairage}</li>
+            <li>Frein: {this.state.Signalement_H4.Frein}</li>
+            <li>Lecteur Badge: {this.state.Signalement_H4["Lecteur Badge"]}</li>
+            <li>Porte: {this.state.Signalement_H4.Porte}</li>
+            <li>Pupitre: {this.state.Signalement_H4.Pupitre}</li>
+            <li>Sonorisation: {this.state.Signalement_H4.Sonorisation}</li>
+            <li>TCMS: {this.state.Signalement_H4.TCMS}</li>
+            <li>Traction: {this.state.Signalement_H4.Traction}</li>
+            <li>Total de SET en H4: {this.state.Signalement_H4["Nombre de SET en H4"]}</li>
+            <li>Total de CBM en H4: {this.state.Signalement_H4["Nombre de CBM en H4"]}</li>
           </ul>
       </div>
     )

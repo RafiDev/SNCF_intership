@@ -67,6 +67,17 @@ module.exports = (app) => {
                         var CompteurSET = 0;
                         var CompteurCBM = 0;
 
+                        var SET_H1 = 0;
+                        var SET_H2 = 0;
+                        var SET_H3 = 0;
+                        var SET_H4 = 0;
+
+
+                        var CBM_H1 = 0;
+                        var CBM_H2 = 0;
+                        var CBM_H3 = 0;
+                        var CBM_H4 = 0;
+
                         var BS = 0;
                         var CLIMATISATION = 0;
                         var COMPRESSEUR = 0;
@@ -86,6 +97,86 @@ module.exports = (app) => {
                         var ECLAIRAGE = 0;
                         var PUPITRE = 0;
                         var SONO = 0;
+
+                        var BS_H1 = 0;
+                        var CLIMATISATION_H1 = 0;
+                        var COMPRESSEUR_H1 = 0;
+                        var DetectionIncendie_H1 = 0;
+                        var CCTV_H1 = 0;
+                        var TCMS_H1 = 0;
+                        var TRACTION_H1 = 0;
+                        var ATESS_H1 = 0;
+                        var TDB_H1 = 0;
+                        var EMCO_H1 = 0;
+                        var EQS_H1 = 0;
+                        var PORTE_H1 = 0;
+                        var FREIN_H1 = 0;
+                        var ComptagePassagers_H1 = 0;
+                        var AFFICHEUR_H1 = 0;
+                        var LecteurBadge_H1 = 0;
+                        var ECLAIRAGE_H1 = 0;
+                        var PUPITRE_H1 = 0;
+                        var SONO_H1 = 0;
+
+                        var BS_H2 = 0;
+                        var CLIMATISATION_H2 = 0;
+                        var COMPRESSEUR_H2 = 0;
+                        var DetectionIncendie_H2 = 0;
+                        var CCTV_H2 = 0;
+                        var TCMS_H2 = 0;
+                        var TRACTION_H2 = 0;
+                        var ATESS_H2 = 0;
+                        var TDB_H2 = 0;
+                        var EMCO_H2 = 0;
+                        var EQS_H2 = 0;
+                        var PORTE_H2 = 0;
+                        var FREIN_H2 = 0;
+                        var ComptagePassagers_H2 = 0;
+                        var AFFICHEUR_H2 = 0;
+                        var LecteurBadge_H2 = 0;
+                        var ECLAIRAGE_H2 = 0;
+                        var PUPITRE_H2 = 0;
+                        var SONO_H2 = 0;
+
+                        var BS_H3 = 0;
+                        var CLIMATISATION_H3 = 0;
+                        var COMPRESSEUR_H3 = 0;
+                        var DetectionIncendie_H3 = 0;
+                        var CCTV_H3 = 0;
+                        var TCMS_H3 = 0;
+                        var TRACTION_H3 = 0;
+                        var ATESS_H3 = 0;
+                        var TDB_H3 = 0;
+                        var EMCO_H3 = 0;
+                        var EQS_H3 = 0;
+                        var PORTE_H3 = 0;
+                        var FREIN_H3 = 0;
+                        var ComptagePassagers_H3 = 0;
+                        var AFFICHEUR_H3 = 0;
+                        var LecteurBadge_H3 = 0;
+                        var ECLAIRAGE_H3 = 0;
+                        var PUPITRE_H3 = 0;
+                        var SONO_H3 = 0;
+
+                        var BS_H4 = 0;
+                        var CLIMATISATION_H4 = 0;
+                        var COMPRESSEUR_H4 = 0;
+                        var DetectionIncendie_H4 = 0;
+                        var CCTV_H4 = 0;
+                        var TCMS_H4 = 0;
+                        var TRACTION_H4 = 0;
+                        var ATESS_H4 = 0;
+                        var TDB_H4 = 0;
+                        var EMCO_H4 = 0;
+                        var EQS_H4 = 0;
+                        var PORTE_H4 = 0;
+                        var FREIN_H4 = 0;
+                        var ComptagePassagers_H4 = 0;
+                        var AFFICHEUR_H4 = 0;
+                        var LecteurBadge_H4 = 0;
+                        var ECLAIRAGE_H4 = 0;
+                        var PUPITRE_H4 = 0;
+                        var SONO_H4 = 0;
 
                         for (var i = 0; i != result.length; i++) {
                             libelle.push(result[i]['libellé de l\'événement']);
@@ -116,6 +207,194 @@ module.exports = (app) => {
                             } if (systeme[i].split('_')[1].localeCompare('H4') == 0) {
                                 systemeH4.push(systeme[i]);
                                 H4++;
+                            }
+                        }
+
+                        for (var i = 0; i != systemeH1.length; i++) {
+                            if (systemeH1[i].split('_')[0].localeCompare('SET') == 0) {
+                                if (systemeH1[i].split('_')[2].localeCompare('BS') == 0) {
+                                    BS_H1++;
+                                } else if (systemeH1[i].split('_')[2].localeCompare('CLIMATISATION') == 0) {
+                                    CLIMATISATION_H1++;
+                                } else if (systemeH1[i].split('_')[2].localeCompare('COMPRESSEUR') == 0) {
+                                    COMPRESSEUR_H1++;
+                                } else if (systemeH1[i].split('_')[2].localeCompare('Detection') == 0 && systemeH1[i].split('_')[3].localeCompare('incendie') == 0) {
+                                    DetectionIncendie_H1++;
+                                } else if (systemeH1[i].split('_')[2].localeCompare('CCTV') == 0) {
+                                    CCTV_H1++;
+                                } else if (systemeH1[i].split('_')[2].localeCompare('TCMS') == 0) {
+                                    TCMS_H1++;
+                                } else if (systemeH1[i].split('_')[2].localeCompare('TRACTION') == 0) {
+                                    TRACTION_H1++;
+                                } else if (systemeH1[i].split('_')[2].localeCompare('ATESS') == 0) {
+                                    ATESS_H1++;
+                                } else if (systemeH1[i].split('_')[2].localeCompare('TDB') == 0) {
+                                    TDB_H1++;
+                                } else if (systemeH1[i].split('_')[2].localeCompare('EMCO') == 0) {
+                                    EMCO_H1++;
+                                } else if (systemeH1[i].split('_')[2].localeCompare('EQS') == 0) {
+                                    EQS_H1++;
+                                } else if (systemeH1[i].split('_')[2].localeCompare('PORTE') == 0) {
+                                    PORTE_H1++;
+                                } else if (systemeH1[i].split('_')[2].localeCompare('FREIN') == 0) {
+                                    FREIN_H1++;
+                                } else if (systemeH1[i].split('_')[2].localeCompare('ComptagePassagers') == 0) {
+                                    ComptagePassagers_H1++;
+                                } else if (systemeH1[i].split('_')[2].localeCompare('AFFICHEUR') == 0) {
+                                    AFFICHEUR_H1++;
+                                } else if (systemeH1[i].split('_')[2].localeCompare('LECTEUR') == 0 && systemeH1[i].split('_')[3].localeCompare('BADGE') == 0) {
+                                    LecteurBadge_H1++;
+                                } else if (systemeH1[i].split('_')[2].localeCompare('ECLAIRAGE') == 0) {
+                                    ECLAIRAGE_H1++;
+                                } else if (systemeH1[i].split('_')[2].localeCompare('PUPITRE') == 0) {
+                                    PUPITRE_H1++;
+                                } else if (systemeH1[i].split('_')[2].localeCompare('SONO') == 0) {
+                                    SONO_H1++;
+                                }
+                                SET_H1++;
+                            } else {
+                                CBM_H1++;
+                            }
+                        }
+
+                        for (var i = 0; i != systemeH2.length; i++) {
+                            if (systemeH2[i].split('_')[0].localeCompare('SET') == 0) { 
+                                if (systemeH2[i].split('_')[2].localeCompare('BS') == 0) {
+                                    BS_H2++;
+                                } else if (systemeH2[i].split('_')[2].localeCompare('CLIMATISATION') == 0) {
+                                    CLIMATISATION_H2++;
+                                } else if (systemeH2[i].split('_')[2].localeCompare('COMPRESSEUR') == 0) {
+                                    COMPRESSEUR_H1++;
+                                } else if (systemeH2[i].split('_')[2].localeCompare('Detection') == 0 && systemeH2[i].split('_')[3].localeCompare('incendie') == 0) {
+                                    DetectionIncendie_H2++;
+                                } else if (systemeH2[i].split('_')[2].localeCompare('CCTV') == 0) {
+                                    CCTV_H2++;
+                                } else if (systemeH2[i].split('_')[2].localeCompare('TCMS') == 0) {
+                                    TCMS_H2++;
+                                } else if (systemeH2[i].split('_')[2].localeCompare('TRACTION') == 0) {
+                                    TRACTION_H2++;
+                                } else if (systemeH2[i].split('_')[2].localeCompare('ATESS') == 0) {
+                                    ATESS_H2++;
+                                } else if (systemeH2[i].split('_')[2].localeCompare('TDB') == 0) {
+                                    TDB_H2++;
+                                } else if (systemeH2[i].split('_')[2].localeCompare('EMCO') == 0) {
+                                    EMCO_H2++;
+                                } else if (systemeH2[i].split('_')[2].localeCompare('EQS') == 0) {
+                                    EQS_H2++;
+                                } else if (systemeH2[i].split('_')[2].localeCompare('PORTE') == 0) {
+                                    PORTE_H2++;
+                                } else if (systemeH2[i].split('_')[2].localeCompare('FREIN') == 0) {
+                                    FREIN_H2++;
+                                } else if (systemeH2[i].split('_')[2].localeCompare('ComptagePassagers') == 0) {
+                                    ComptagePassagers_H2++;
+                                } else if (systemeH2[i].split('_')[2].localeCompare('AFFICHEUR') == 0) {
+                                    AFFICHEUR_H2++;
+                                } else if (systemeH2[i].split('_')[2].localeCompare('LECTEUR') == 0 && systemeH2[i].split('_')[3].localeCompare('BADGE') == 0) {
+                                    LecteurBadge_H2++;
+                                } else if (systemeH2[i].split('_')[2].localeCompare('ECLAIRAGE') == 0) {
+                                    ECLAIRAGE_H2++;
+                                } else if (systemeH2[i].split('_')[2].localeCompare('PUPITRE') == 0) {
+                                    PUPITRE_H2++;
+                                } else if (systemeH2[i].split('_')[2].localeCompare('SONO') == 0) {
+                                    SONO_H2++;
+                                }
+                                SET_H2++;
+                            } else {
+                                CBM_H2++;
+                            }
+                        }
+
+                        for (var i = 0; i != systemeH3.length; i++) {
+                            if (systemeH3[i].split('_')[0].localeCompare('SET') == 0) {
+                                if (systemeH3[i].split('_')[2].localeCompare('BS') == 0) {
+                                    BS_H3++;
+                                } else if (systemeH3[i].split('_')[2].localeCompare('CLIMATISATION') == 0) {
+                                    CLIMATISATION_H3++;
+                                } else if (systemeH3[i].split('_')[2].localeCompare('COMPRESSEUR') == 0) {
+                                    COMPRESSEUR_H3++;
+                                } else if (systemeH3[i].split('_')[2].localeCompare('Detection') == 0 && systemeH3[i].split('_')[3].localeCompare('incendie') == 0) {
+                                    DetectionIncendie_H3++;
+                                } else if (systemeH3[i].split('_')[2].localeCompare('CCTV') == 0) {
+                                    CCTV_H3++;
+                                } else if (systemeH3[i].split('_')[2].localeCompare('TCMS') == 0) {
+                                    TCMS_H3++;
+                                } else if (systemeH3[i].split('_')[2].localeCompare('TRACTION') == 0) {
+                                    TRACTION_H3++;
+                                } else if (systemeH3[i].split('_')[2].localeCompare('ATESS') == 0) {
+                                    ATESS_H3++;
+                                } else if (systemeH3[i].split('_')[2].localeCompare('TDB') == 0) {
+                                    TDB_H3++;
+                                } else if (systemeH3[i].split('_')[2].localeCompare('EMCO') == 0) {
+                                    EMCO_H3++;
+                                } else if (systemeH3[i].split('_')[2].localeCompare('EQS') == 0) {
+                                    EQS_H3++;
+                                } else if (systemeH3[i].split('_')[2].localeCompare('PORTE') == 0) {
+                                    PORTE_H3++;
+                                } else if (systemeH3[i].split('_')[2].localeCompare('FREIN') == 0) {
+                                    FREIN_H3++;
+                                } else if (systemeH3[i].split('_')[2].localeCompare('ComptagePassagers') == 0) {
+                                    ComptagePassagers_H3++;
+                                } else if (systemeH3[i].split('_')[2].localeCompare('AFFICHEUR') == 0) {
+                                    AFFICHEUR_H3++;
+                                } else if (systemeH3[i].split('_')[2].localeCompare('LECTEUR') == 0 && systemeH3[i].split('_')[3].localeCompare('BADGE') == 0) {
+                                    LecteurBadge_H3++;
+                                } else if (systemeH3[i].split('_')[2].localeCompare('ECLAIRAGE') == 0) {
+                                    ECLAIRAGE_H3++;
+                                } else if (systemeH3[i].split('_')[2].localeCompare('PUPITRE') == 0) {
+                                    PUPITRE_H3++;
+                                } else if (systemeH3[i].split('_')[2].localeCompare('SONO') == 0) {
+                                    SONO_H3++;
+                                }
+                                SET_H3++;
+                            } else {
+                                CBM_H3++;
+                            }
+                        }
+
+                        for (var i = 0; i != systemeH4.length; i++) {
+                            if (systemeH4[i].split('_')[0].localeCompare('SET') == 0) {
+                                if (systemeH4[i].split('_')[2].localeCompare('BS') == 0) {
+                                    BS_H4++;
+                                } else if (systemeH4[i].split('_')[2].localeCompare('CLIMATISATION') == 0) {
+                                    CLIMATISATION_H4++;
+                                } else if (systemeH4[i].split('_')[2].localeCompare('COMPRESSEUR') == 0) {
+                                    COMPRESSEUR_H4++;
+                                } else if (systemeH4[i].split('_')[2].localeCompare('Detection') == 0 && systemeH4[i].split('_')[3].localeCompare('incendie') == 0) {
+                                    DetectionIncendie_H4++;
+                                } else if (systemeH4[i].split('_')[2].localeCompare('CCTV') == 0) {
+                                    CCTV_H4++;
+                                } else if (systemeH4[i].split('_')[2].localeCompare('TCMS') == 0) {
+                                    TCMS_H4++;
+                                } else if (systemeH4[i].split('_')[2].localeCompare('TRACTION') == 0) {
+                                    TRACTION_H4++;
+                                } else if (systemeH4[i].split('_')[2].localeCompare('ATESS') == 0) {
+                                    ATESS_H4++;
+                                } else if (systemeH4[i].split('_')[2].localeCompare('TDB') == 0) {
+                                    TDB_H4++;
+                                } else if (systemeH4[i].split('_')[2].localeCompare('EMCO') == 0) {
+                                    EMCO_H4++;
+                                } else if (systemeH4[i].split('_')[2].localeCompare('EQS') == 0) {
+                                    EQS_H4++;
+                                } else if (systemeH4[i].split('_')[2].localeCompare('PORTE') == 0) {
+                                    PORTE_H4++;
+                                } else if (systemeH4[i].split('_')[2].localeCompare('FREIN') == 0) {
+                                    FREIN_H4++;
+                                } else if (systemeH4[i].split('_')[2].localeCompare('ComptagePassagers') == 0) {
+                                    ComptagePassagers_H4++;
+                                } else if (systemeH4[i].split('_')[2].localeCompare('AFFICHEUR') == 0) {
+                                    AFFICHEUR_H4++;
+                                } else if (systemeH4[i].split('_')[2].localeCompare('LECTEUR') == 0 && systemeH4[i].split('_')[3].localeCompare('BADGE') == 0) {
+                                    LecteurBadge_H4++;
+                                } else if (systemeH4[i].split('_')[2].localeCompare('ECLAIRAGE') == 0) {
+                                    ECLAIRAGE_H4++;
+                                } else if (systemeH4[i].split('_')[2].localeCompare('PUPITRE') == 0) {
+                                    PUPITRE_H4++;
+                                } else if (systemeH4[i].split('_')[2].localeCompare('SONO') == 0) {
+                                    SONO_H4++;
+                                }
+                                SET_H4++;
+                            } else {
+                                CBM_H4++;
                             }
                         }
                     
@@ -193,6 +472,62 @@ module.exports = (app) => {
                             "Pupitre": PUPITRE, "Sonorisation": SONO,
                             "Compresseur": COMPRESSEUR
                         };
+
+                        var data_H1 = {
+                            "BS": BS_H1, "Climatisation": CLIMATISATION_H1, 
+                            "Detection Incendie": DetectionIncendie_H1, "CCTV": CCTV_H1, 
+                            "TCMS": TCMS_H1, "Traction": TRACTION_H1, 
+                            "ATESS": ATESS_H1, "TDB": TDB_H1, 
+                            "EMCO": EMCO_H1, "EQS": EQS_H1, 
+                            "Porte": PORTE_H1, "Frein": FREIN_H1, 
+                            "Comptage Passagers": ComptagePassagers_H1, "Afficheur": AFFICHEUR_H1, 
+                            "Lecteur Badge": LecteurBadge_H1, "Eclairage": ECLAIRAGE_H1, 
+                            "Pupitre": PUPITRE_H1, "Sonorisation": SONO_H1,
+                            "Compresseur": COMPRESSEUR_H1,
+                            "Nombre de SET en H1": SET_H1, "Nombre de CBM en H1": CBM_H1
+                        };
+
+                        var data_H2 = {
+                            "BS": BS_H2, "Climatisation": CLIMATISATION_H2, 
+                            "Detection Incendie": DetectionIncendie_H2, "CCTV": CCTV_H2, 
+                            "TCMS": TCMS_H2, "Traction": TRACTION_H2, 
+                            "ATESS": ATESS_H2, "TDB": TDB_H2, 
+                            "EMCO": EMCO_H2, "EQS": EQS_H2, 
+                            "Porte": PORTE_H2, "Frein": FREIN_H2, 
+                            "Comptage Passagers": ComptagePassagers_H2, "Afficheur": AFFICHEUR_H2, 
+                            "Lecteur Badge": LecteurBadge_H2, "Eclairage": ECLAIRAGE_H2, 
+                            "Pupitre": PUPITRE_H2, "Sonorisation": SONO_H2,
+                            "Compresseur": COMPRESSEUR_H2,
+                            "Nombre de SET en H2": SET_H2, "Nombre de CBM en H2": CBM_H2
+                        };
+
+                        var data_H3 = {
+                            "BS": BS_H3, "Climatisation": CLIMATISATION_H3, 
+                            "Detection Incendie": DetectionIncendie_H3, "CCTV": CCTV_H3, 
+                            "TCMS": TCMS_H3, "Traction": TRACTION_H3, 
+                            "ATESS": ATESS_H3, "TDB": TDB_H3, 
+                            "EMCO": EMCO_H3, "EQS": EQS_H3, 
+                            "Porte": PORTE_H3, "Frein": FREIN_H3, 
+                            "Comptage Passagers": ComptagePassagers_H3, "Afficheur": AFFICHEUR_H3, 
+                            "Lecteur Badge": LecteurBadge_H3, "Eclairage": ECLAIRAGE_H3, 
+                            "Pupitre": PUPITRE_H3, "Sonorisation": SONO_H3,
+                            "Compresseur": COMPRESSEUR_H3,
+                            "Nombre de SET en H3": SET_H3, "Nombre de CBM en H3": CBM_H3
+                        };
+
+                        var data_H4 = {
+                            "BS": BS_H4, "Climatisation": CLIMATISATION_H4, 
+                            "Detection Incendie": DetectionIncendie_H4, "CCTV": CCTV_H4, 
+                            "TCMS": TCMS_H4, "Traction": TRACTION_H4, 
+                            "ATESS": ATESS_H4, "TDB": TDB_H4, 
+                            "EMCO": EMCO_H4, "EQS": EQS_H4, 
+                            "Porte": PORTE_H4, "Frein": FREIN_H4, 
+                            "Comptage Passagers": ComptagePassagers_H4, "Afficheur": AFFICHEUR_H4, 
+                            "Lecteur Badge": LecteurBadge_H4, "Eclairage": ECLAIRAGE_H4, 
+                            "Pupitre": PUPITRE_H4, "Sonorisation": SONO_H4,
+                            "Compresseur": COMPRESSEUR_H4,
+                            "Nombre de SET en H4": SET_H4, "Nombre de CBM en H4": CBM_H4
+                        };
                         
                         var data = {
                             "Nombre de système total": systemeTT,
@@ -201,6 +536,12 @@ module.exports = (app) => {
                                 "H2": H2,
                                 "H3": H3,
                                 "H4": H4
+                            },
+                            "Nombre de signalement par hiérarchie": {
+                                "systeme en H1": data_H1,
+                                "systeme en H2": data_H2,
+                                "systeme en H3": data_H3,
+                                "systeme en H4": data_H4
                             },
                             "Type de signalement": {
                                 "Nombre total de SET": CompteurSET,
