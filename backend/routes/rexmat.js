@@ -1,4 +1,4 @@
-module.exports = function (app) {
+module.exports = (app) => {
     var multer = require('multer');
     var xlstojson = require("xls-to-json-lc");
     var xlsxtojson = require("xlsx-to-json-lc");
@@ -43,19 +43,29 @@ module.exports = function (app) {
                         if (err) {
                             return res.json({error_code: 1, err_desc: err, data: null});
                         }
-                        var systemeTT = 0;
-                        var CompteurSET = 0;
-                        var CompteurCBM = 0;
-                                
+
+                        var rames = [];
                         var libelle = [];
                         var systeme = [];
+                        var rameLibelle = [];
+
                         var arrCBM = [];
                         var arrSET = [];
+
+                        var systemeH1 = [];
+                        var systemeH2 = [];
+                        var systemeH3 = [];
+                        var systemeH4 = [];
+
 
                         var H1 = 0;
                         var H2 = 0;
                         var H3 = 0;
                         var H4 = 0;
+
+                        var systemeTT = 0;
+                        var CompteurSET = 0;
+                        var CompteurCBM = 0;
 
                         var BS = 0;
                         var CLIMATISATION = 0;
@@ -79,6 +89,8 @@ module.exports = function (app) {
 
                         for (var i = 0; i != result.length; i++) {
                             libelle.push(result[i]['libellé de l\'événement']);
+                            rames.push(result[i]['engin impactée']);
+                            rameLibelle.push(rames[i] + ' ' + libelle[i]);
                         }
 
                         for (var i = 0; i != libelle.length; i++) {
@@ -93,12 +105,16 @@ module.exports = function (app) {
 
                         for (var i = 0; i != systeme.length; i++) {
                             if (systeme[i].split('_')[1].localeCompare('H1') == 0) {
+                                systemeH1.push(systeme[i]);
                                 H1++;
                             } else if (systeme[i].split('_')[1].localeCompare('H2') == 0) {
+                                systemeH2.push(systeme[i]);
                                 H2++;
                             } else if (systeme[i].split('_')[1].localeCompare('H3') == 0) {
+                                systemeH3.push(systeme[i]);
                                 H3++;
                             } if (systeme[i].split('_')[1].localeCompare('H4') == 0) {
+                                systemeH4.push(systeme[i]);
                                 H4++;
                             }
                         }
@@ -200,5 +216,4 @@ module.exports = function (app) {
             }
         )
     });
-
 }
